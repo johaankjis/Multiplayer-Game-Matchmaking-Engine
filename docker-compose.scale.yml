@@ -1,0 +1,24 @@
+version: '3.8'
+
+# Docker Compose configuration for horizontal scaling
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.scale.yml up --scale matchmaking-engine=3
+
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: matchmaking-nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - matchmaking-engine
+    networks:
+      - matchmaking-network
+    restart: unless-stopped
+
+  matchmaking-engine:
+    # Remove container_name to allow scaling
+    container_name: null
+    ports:
+      - "8080-8089:8080"  # Port range for multiple instances
