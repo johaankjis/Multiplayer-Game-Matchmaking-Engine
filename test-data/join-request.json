@@ -1,0 +1,8 @@
+{
+  "playerId": "test-player-123",
+  "username": "TestPlayer",
+  "skillRating": 1500,
+  "region": "US-EAST",
+  "latency": 50,
+  "preferredRole": "DPS"
+}
